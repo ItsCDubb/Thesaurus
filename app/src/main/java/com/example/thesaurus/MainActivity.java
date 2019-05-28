@@ -15,7 +15,22 @@ public class MainActivity extends AppCompatActivity {
     TextView textDisplay;
     Button   buttonSynonyms;
 
-    synonyms();
+    String[] synonyms(String s){
+        String[][] synonyms = new String[][] { {"swift",  "abrupt", "expeditious", "hasty", "nimble", "quick", "rapid", "speedy", "sudden", "unexpected"},
+                {"objective", "detached", "disinterested", "dispassionate", "equitable", "evenhanded", "nonpartisan", "open-minded", "unbiased"},
+                {"calculate", "adjust", "appraise", "consider", "count", "determine", "forecast", "gauge", "guess", "measure", "multiply", "reckon", "subtract", "tally", "weigh", "work out"},
+                {"create", "build", "conceive", "constitute", "construct", "design", "devise", "discover", "establish", "forge", "form"} };
+
+        for(int i = 0; i < synonyms.length; ++i) {
+            for(int j = 0; j < synonyms[i].length; ++j){
+                if(s.equals(synonyms[i][j])) {
+                    return synonyms[i];
+                }
+            }
+        }
+
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("Synonym", "The Synonym button was clicked");
+
+                String[] synonymList = synonyms(textInput.getText().toString());
+                String arrayToString = "";
+                for(int i = 0; i < synonymList.length; ++i) {
+                    arrayToString = arrayToString + synonymList[i] + " ";
+                }
+                textDisplay.setText(arrayToString);
             }
         });
     }
